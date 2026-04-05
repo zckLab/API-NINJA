@@ -42,4 +42,5 @@ public class NinjaController {
     public ResponseEntity<NinjaResponseDTO> updateNinja(@PathVariable Long id, @RequestBody @Valid NinjaRequestDTO ninjaRequestDTO){
         return ResponseEntity.ok(serviceNinja.updateNinja(id, ninjaRequestDTO));
     }
+
 }
