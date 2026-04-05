@@ -1,9 +1,9 @@
 package com.zcklab.api.Enums;
 
 public enum Category {
-        ASSASSINO,
-        ESPIAO,
-        GUERREIRO,
-        MERCENARIO,
-        GUARDA_COSTAS
+        MURDER,
+        SPY,
+        WARRIOR,
+        MERCENARY,
+        BODYGUARD
 }

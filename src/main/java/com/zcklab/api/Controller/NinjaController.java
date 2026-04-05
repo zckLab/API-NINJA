@@ -35,7 +35,7 @@ public class NinjaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNinja(@PathVariable Long id){
         serviceNinja.deleteNinja(id);
-        return ResponseEntity.noContent().build(); //Retorna 204 No Content
+        return ResponseEntity.noContent().build(); //Return 204 No Content
     }
 
     @PutMapping("/{id}")

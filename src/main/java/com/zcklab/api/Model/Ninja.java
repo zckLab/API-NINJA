@@ -25,7 +25,7 @@ public class Ninja {
     private Long id;
 
 
-    @Column(name = "full_name", nullable = false, length = 12)
+    @Column(name = "full_name", nullable = false, length = 20)
     @NotBlank(message = "Name is Required")
     private String name;
 
@@ -36,7 +36,7 @@ public class Ninja {
 
 
     @Column(name = "usr_birthDate", nullable = false)
-    @Past // faz com que a data nao seja no dia de hoje nem futuro (uso correto para passado ou hoje @PastOrPresent)
+    @Past // makes the date not today or in the future (correct use for past or today @PastOrPresent)
     private LocalDate birthDate;
 
 

@@ -20,24 +20,24 @@ public class ServiceNinja {
 
 
 
-   //1. Buscar todos agora retorna uma lista de ResponseDTO
+   //1. Fetch All now returns a list of ResponseDTO
     public List<NinjaResponseDTO> findAllNinjas(){
         return repositoryNinja.findAll()
-                .stream()
-                .map(NinjaResponseDTO::new) // Para cada Entity, chama o construtor do ResponseDTO
-                .collect(Collectors.toList()); // Fecha a esteira e entrega a lista de ResponseDTOs
+                .stream() //conveyor
+                .map(NinjaResponseDTO::new) // For each Entity, call the ResponseDTO constructor
+                .collect(Collectors.toList()); // Close the conveyor belt and hand over the ResponseDTO list
     }
 
 
 
 
 
-    //2. Criar recebe o RequestDTO e retorna o ResponseDTO
+    //2. Create receives the RequestDTO and returns the ResponseDTO
     public NinjaResponseDTO createNinja(NinjaRequestDTO ninjaDTO){
-        Ninja ninjaConvertido = new Ninja(ninjaDTO); // Converte o RequestDTO de entrada em Entity
+        Ninja ninjaConvertido = new Ninja(ninjaDTO); // Converts input RequestDTO to Entity
 
 
-        //Devolve o Ninja (agora com ID) para o Service, que o prepara para a saida
+        //Returns the Ninja (now with ID) to Service, which prepares it for exit
         return new NinjaResponseDTO(repositoryNinja.save(ninjaConvertido));
     }
 
@@ -45,7 +45,7 @@ public class ServiceNinja {
 
 
 
-    //delete com condicional
+    //3. delete with conditional
     public void deleteNinja(Long id) {
         if (!repositoryNinja.existsById(id)) {
             throw new RuntimeException("Ninja not found");
@@ -56,12 +56,12 @@ public class ServiceNinja {
 
 
 
-    //3. Update recebe o RequestDTO
+    //4. Update receives RequestDTO
     public NinjaResponseDTO updateNinja(Long id, NinjaRequestDTO ninjaDTO) {
         Ninja ninjaExistente = repositoryNinja.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ninja not found"));
 
-        // atualiza os dados da Entity com o que veio no DTO
+        // updates the Entity data with what came in the ninjaDTO
         ninjaExistente.setName(ninjaDTO.getName());
         ninjaExistente.setEmail(ninjaDTO.getEmail());
         ninjaExistente.setBirthDate(ninjaDTO.getBirthDate());
