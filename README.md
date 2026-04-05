@@ -55,7 +55,7 @@ Key learning objectives included:
 **Instalation:**
 1. Clone the repository:
 ```bash
-git clone [https://github.com/zckLab/API-NINJA.git](https://github.com/zckLab/API-NINJA.git)
+git clone https://github.com/zckLab/API-NINJA.git
 ```
 2. Navigate to the project foldder:
 ```bash
