@@ -1,6 +1,16 @@
 # Ninja Registration API
 
-The Ninja Registration API is a Spring Boot application developed to manage ninja records efficiently. This project emphasizes secure data handling, architectural best practices, and robust validation.
+The Ninja Registration API is a Spring Boot application built as a hands-on project to demonstrate the core fundamentals of RESTful API development.
+
+---
+
+## Project Purpose
+This repository is an **educational resource** designed for learning purposes. It is not intended for production environments. The primary goal of this project is to showcase how to structure a Java backend application, implement security layers via DTOs, and handle data persistence using Spring Data JPA.
+
+Key learning objectives included:
+* Project layering (Controller, Service, Repository).
+* Request validation and error handling.
+* Understanding the lifecycle of an HTTP request.
 
 ---
 
