@@ -1,7 +1,6 @@
 package com.zcklab.api.Controller;
 
 
-import com.zcklab.api.Model.Ninja;
 import com.zcklab.api.Service.ServiceNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
