@@ -44,5 +44,4 @@ public class NinjaRequestDTO {
     @NotBlank(message = "Description is Required")
     @Size(max = 50, message = "Description should have a max of 50 characters" )
     private String description;
-
 }
