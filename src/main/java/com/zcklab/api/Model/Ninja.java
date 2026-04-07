@@ -10,7 +10,7 @@ import org.springframework.beans.BeanUtils;
 
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Entity
 @Table(name="tb_ninjas")
@@ -64,7 +64,8 @@ public class Ninja {
     private String description;
 
 
-    public Ninja(NinjaRequestDTO ninjaDTO){ //converte ninjaDTO para Entity
+    public Ninja(NinjaRequestDTO ninjaDTO){ //ninjaDTO to Entity
+
         BeanUtils.copyProperties(ninjaDTO,this);
     }
 
