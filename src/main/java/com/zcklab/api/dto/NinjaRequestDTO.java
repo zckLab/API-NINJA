@@ -1,13 +1,8 @@
 package com.zcklab.api.dto;
 
 import com.zcklab.api.Enums.*;
-import com.zcklab.api.Model.Ninja;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.BeanUtils;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -15,6 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class NinjaRequestDTO {
@@ -49,7 +45,4 @@ public class NinjaRequestDTO {
     @Size(max = 50, message = "Description should have a max of 50 characters" )
     private String description;
 
-    public NinjaRequestDTO(Ninja ninja){ //converte o Entity para DTO
-        BeanUtils.copyProperties(ninja,this);
-    }
 }
