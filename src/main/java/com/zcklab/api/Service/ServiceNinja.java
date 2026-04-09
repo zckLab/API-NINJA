@@ -51,6 +51,7 @@ public class ServiceNinja {
                 .orElseThrow(() -> new RuntimeException("Ninja not found"));
 
         ninjaExisting.setName(ninjaDTO.name());
+        ninjaExisting.setCpf(ninjaDTO.cpf());
         ninjaExisting.setEmail(ninjaDTO.email());
         ninjaExisting.setBirthDate(ninjaDTO.birthDate());
         ninjaExisting.setCategory(ninjaDTO.category());
@@ -67,6 +68,7 @@ public class ServiceNinja {
         Ninja ninja = new Ninja();
 
         ninja.setName(dto.name());
+        ninja.setCpf(dto.cpf());
         ninja.setEmail(dto.email());
         ninja.setBirthDate(dto.birthDate());
         ninja.setCategory(dto.category());
@@ -83,6 +85,7 @@ public class ServiceNinja {
         return new NinjaResponseDTO(
                 ninja.getId(),
                 ninja.getName(),
+                ninja.getCpf(),
                 ninja.getEmail(),
                 ninja.getBirthDate(),
                 ninja.getCategory(),
