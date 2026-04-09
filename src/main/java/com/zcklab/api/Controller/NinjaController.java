@@ -1,6 +1,7 @@
 package com.zcklab.api.Controller;
 
 
+
 import com.zcklab.api.Service.ServiceNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
@@ -25,6 +26,8 @@ public class NinjaController {
 
 
 
+
+
     // Here, we use the findAllNinjas method from the Service.
     // It gets all entities, transforms each one using the toResponseDTO method (to safely convert the model into a response),
     // and then returns everything as a list.
@@ -32,6 +35,35 @@ public class NinjaController {
     public ResponseEntity<List<NinjaResponseDTO>> getAllNinjas(){
         return ResponseEntity.ok(serviceNinja.findAllNinjas()); // Return 200
     }
+
+
+
+
+
+    // To filter by name, we first create the endpoint "/getname" and it will return a Response that uses @RequestParam,
+    // which serves to extract values that come in the URL.
+    // You know when you create an account, for example, and then click on "show name"
+    // and a URL like "/users/search?name=Gabriel" appears? What comes after the "?"
+    // are the request parameters that were retrieved and delivered to the variable in the project.
+    @GetMapping("/getname")
+    public ResponseEntity<NinjaResponseDTO> searchByName(@RequestParam String name){
+        return ResponseEntity.ok(serviceNinja.findByName(name));
+
+        // So, we call the request name parameter and return the HTTP status ok (200)
+        // when serviceNinja is able to find the name.
+    }
+
+
+
+
+
+
+    @GetMapping("/getemail")
+    public ResponseEntity<NinjaResponseDTO> searchByEmail(@RequestParam String email){
+        return ResponseEntity.ok(serviceNinja.findByEmail(email));
+    }
+
+
 
 
 
@@ -47,6 +79,10 @@ public class NinjaController {
     }
 
 
+
+
+
+
     //Actually, this is the easiest one.
     //We just use a Void method (return nothing) and call deleteNinja
     @DeleteMapping("/{id}")
@@ -55,6 +91,8 @@ public class NinjaController {
         return ResponseEntity.noContent().build(); //Return 204 No Content (without this line,
                                                   // that would return 200 (not the correct one))
     }
+
+
 
 
 
