@@ -3,7 +3,6 @@ package com.zcklab.api.Model;
 
 import com.zcklab.api.Enums.*;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 
@@ -23,20 +22,20 @@ public class Ninja {
     private Long id;
 
 
-    @Column(name = "full_name", nullable = false, length = 20)
-    @NotBlank(message = "Name is Required")
+    @Column(name = "full_name", nullable = false, length = 100)
     private String name;
 
 
-    @Column(name = "usr_email", nullable = false)
-    @Email(message = "Invalid Email")
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
+
+    @Column(name = "usr_email", nullable = false, unique = true)
     private String email;
 
 
-    @Column(name = "usr_birthDate", nullable = false)
-    @Past // makes the date not today or in the future (correct use for past or today @PastOrPresent)
+    @Column(name = "usr_birth_date", nullable = false)
     private LocalDate birthDate;
-
 
 
     @Column(name = "usr_category", nullable = false)
