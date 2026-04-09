@@ -4,7 +4,6 @@ import com.zcklab.api.Enums.Ability;
 import com.zcklab.api.Enums.Category;
 import com.zcklab.api.Enums.Elementals;
 import com.zcklab.api.Enums.Rank;
-import com.zcklab.api.Model.Ninja;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
