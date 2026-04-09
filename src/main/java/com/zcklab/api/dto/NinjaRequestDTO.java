@@ -1,47 +1,41 @@
 package com.zcklab.api.dto;
 
-import com.zcklab.api.Enums.*;
+import com.zcklab.api.Enums.Ability;
+import com.zcklab.api.Enums.Category;
+import com.zcklab.api.Enums.Elementals;
+import com.zcklab.api.Enums.Rank;
+import com.zcklab.api.Model.Ninja;
 import jakarta.validation.constraints.*;
-import lombok.*;
 
 import java.time.LocalDate;
 
+public record NinjaRequestDTO(
+        @NotBlank(message = "Name is Required")
+        @Size(min = 3, max = 20, message="Name min characters is 3 and max 12")
+        String name,
 
+        @NotBlank(message = "Email is required")
+        @Email(message = "Invalid Email Format")
+        String email,
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class NinjaRequestDTO {
+        @NotNull(message = "Birth Date is Required")
+        @Past(message = "Birth Date must be in the past")
+        LocalDate birthDate,
 
-    @NotBlank(message = "Name is Required")
-    @Size(min = 3, max = 12, message="Name min characters is 3 and max 12")
-    private String name;
+        @NotNull(message = "Category is Required")
+        Category category,
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid Email Format")
-    private String email;
+        @NotNull(message = "Ability is Required")
+        Ability ability,
 
-    @NotNull(message = "Birth Date is Required")
-    @Past(message = "Birth Date must be in the past")
-    private LocalDate birthDate;
+        @NotNull(message = "Elemental is Required")
+        Elementals elementals,
 
-    @NotNull(message = "Category is Required")
-    private Category category;
+        @NotNull(message = "Rank is Required")
+        Rank rank,
 
-    @NotNull(message = "Ability is Required")
-    private Ability ability;
+        @NotBlank(message = "Description is Required")
+        @Size(max = 50, message = "Description should have a max of 50 characters" )
+        String description
 
-    @NotNull(message = "Elemental is Required")
-    private Elementals elementals;
-
-    @NotNull(message = "Rank is Required")
-    private Rank rank;
-
-
-
-    @NotBlank(message = "Description is Required")
-    @Size(max = 50, message = "Description should have a max of 50 characters" )
-    private String description;
-}
+){}

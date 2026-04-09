@@ -2,11 +2,9 @@ package com.zcklab.api.Model;
 
 
 import com.zcklab.api.Enums.*;
-import com.zcklab.api.dto.NinjaRequestDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.springframework.beans.BeanUtils;
 
 
 import java.time.LocalDate;
@@ -62,11 +60,5 @@ public class Ninja {
 
     @Column(name = "usr_description", nullable = false, length = 120)
     private String description;
-
-
-    public Ninja(NinjaRequestDTO ninjaDTO){ //ninjaDTO to Entity
-
-        BeanUtils.copyProperties(ninjaDTO,this);
-    }
 
 }

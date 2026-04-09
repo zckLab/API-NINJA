@@ -1,6 +1,5 @@
 package com.zcklab.api.Service;
 
-
 import com.zcklab.api.Model.Ninja;
 import com.zcklab.api.Repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
@@ -17,35 +16,27 @@ public class ServiceNinja {
 
     private final RepositoryNinja repositoryNinja;
 
-
-
-
-   //1. Fetch All now returns a list of ResponseDTO
-    public List<NinjaResponseDTO> findAllNinjas(){
+    // 1. Find All
+    public List<NinjaResponseDTO> findAllNinjas() {
         return repositoryNinja.findAll()
-                .stream() //conveyor
-                .map(NinjaResponseDTO::new) // For each Entity, call the ResponseDTO constructor
-                .collect(Collectors.toList()); // Close the conveyor belt and hand over the ResponseDTO list
+                .stream()
+                .map(this::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
+    // 2. Create
+    public NinjaResponseDTO createNinja(NinjaRequestDTO ninjaDTO) {
 
+        Ninja ninjaConverted = toEntity(ninjaDTO);
 
+        Ninja ninjaSaved = repositoryNinja.save(ninjaConverted);
 
-
-    //2. Create receives the RequestDTO and returns the ResponseDTO
-    public NinjaResponseDTO createNinja(NinjaRequestDTO ninjaDTO){
-        Ninja ninjaConvertido = new Ninja(ninjaDTO); // Converts input RequestDTO to Entity
-
-
-        //Returns the Ninja (now with ID) to Service, which prepares it for exit
-        return new NinjaResponseDTO(repositoryNinja.save(ninjaConvertido));
+        return toResponseDTO(ninjaSaved);
     }
 
+    // 3. Delete
 
-
-
-
-    //3. delete with conditional
+    // A conditional statement that, if it does not exist, returns a RuntimeException.
     public void deleteNinja(Long id) {
         if (!repositoryNinja.existsById(id)) {
             throw new RuntimeException("Ninja not found");
@@ -53,24 +44,53 @@ public class ServiceNinja {
         repositoryNinja.deleteById(id);
     }
 
-
-
-
-    //4. Update receives RequestDTO
+    // 4. Update
     public NinjaResponseDTO updateNinja(Long id, NinjaRequestDTO ninjaDTO) {
+
         Ninja ninjaExistente = repositoryNinja.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ninja not found"));
 
-        // updates the Entity data with what came in the ninjaDTO
-        ninjaExistente.setName(ninjaDTO.getName());
-        ninjaExistente.setEmail(ninjaDTO.getEmail());
-        ninjaExistente.setBirthDate(ninjaDTO.getBirthDate());
-        ninjaExistente.setCategory(ninjaDTO.getCategory());
-        ninjaExistente.setAbility(ninjaDTO.getAbility());
-        ninjaExistente.setElementals(ninjaDTO.getElementals());
-        ninjaExistente.setRank(ninjaDTO.getRank());
-        ninjaExistente.setDescription(ninjaDTO.getDescription());
+        ninjaExistente.setName(ninjaDTO.name());
+        ninjaExistente.setEmail(ninjaDTO.email());
+        ninjaExistente.setBirthDate(ninjaDTO.birthDate());
+        ninjaExistente.setCategory(ninjaDTO.category());
+        ninjaExistente.setAbility(ninjaDTO.ability());
+        ninjaExistente.setElementals(ninjaDTO.elementals());
+        ninjaExistente.setRank(ninjaDTO.rank());
+        ninjaExistente.setDescription(ninjaDTO.description());
 
-        return new NinjaResponseDTO(repositoryNinja.save(ninjaExistente));
+        return toResponseDTO(repositoryNinja.save(ninjaExistente));
+    }
+
+    // Mapper: RequestDTO -> Entity
+    private Ninja toEntity(NinjaRequestDTO dto) {
+        Ninja ninja = new Ninja();
+
+        ninja.setName(dto.name());
+        ninja.setEmail(dto.email());
+        ninja.setBirthDate(dto.birthDate());
+        ninja.setCategory(dto.category());
+        ninja.setAbility(dto.ability());
+        ninja.setElementals(dto.elementals());
+        ninja.setRank(dto.rank());
+        ninja.setDescription(dto.description());
+
+        return ninja;
+    }
+
+    // Mapper: Entity -> ResponseDTO
+    private NinjaResponseDTO toResponseDTO(Ninja ninja) {
+        return new NinjaResponseDTO(
+                ninja.getId(),
+                ninja.getName(),
+                ninja.getEmail(),
+                ninja.getBirthDate(),
+                ninja.getCategory(),
+                ninja.getAbility(),
+                ninja.getElementals(),
+                ninja.getRank(),
+                ninja.getDescription()
+
+        );
     }
 }
