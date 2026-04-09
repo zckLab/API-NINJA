@@ -104,4 +104,5 @@ public class NinjaController {
         return ResponseEntity.ok(serviceNinja.updateNinja(id, ninjaRequestDTO)); // Return 200
     }
 
+
 }

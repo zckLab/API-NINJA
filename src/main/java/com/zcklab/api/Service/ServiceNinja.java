@@ -16,6 +16,17 @@ public class ServiceNinja {
 
     private final RepositoryNinja repositoryNinja;
 
+
+
+    // Anything that goes to a method that returns something will always be a Response,
+    // and whenever it's a creation method, we'll transform the Request into an Entity
+    // (for updating, we'll use both: transform it into an entity, save it, and update it back to a Request).
+
+
+
+
+
+
     // 1. Find All
     public List<NinjaResponseDTO> findAllNinjas() {
         return repositoryNinja.findAll()
@@ -23,6 +34,11 @@ public class ServiceNinja {
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
     }
+
+
+
+
+
 
     // 2. Create
     public NinjaResponseDTO createNinja(NinjaRequestDTO ninjaDTO) {
@@ -34,6 +50,11 @@ public class ServiceNinja {
         return toResponseDTO(ninjaSaved);
     }
 
+
+
+
+
+
     // 3. Delete
 
     // A conditional statement that, if it does not exist, returns a RuntimeException.
@@ -43,6 +64,11 @@ public class ServiceNinja {
         }
         repositoryNinja.deleteById(id);
     }
+
+
+
+
+
 
     // 4. Update
     public NinjaResponseDTO updateNinja(Long id, NinjaRequestDTO ninjaDTO) {
@@ -63,6 +89,38 @@ public class ServiceNinja {
         return toResponseDTO(repositoryNinja.save(ninjaExisting));
     }
 
+
+
+
+
+
+    // 5. Search by name
+
+    // Here, we create the `findByName` method that retrieves the String "name",
+    // and create an entity called "nameNinja" that will call the existing `findByName(name)`
+    // method in the repository. We throw a `RuntimeException` if the value is null.
+    public NinjaResponseDTO findByName(String name) {
+        Ninja nameNinja = repositoryNinja.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Ninja not found"));
+
+        return toResponseDTO(nameNinja); // If everything is OK, we return the `toEntity` method to `nameNinja`.
+    }
+
+
+
+
+
+    public NinjaResponseDTO findByEmail(String email) {
+        Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new RuntimeException("Ninja not found"));
+
+        return toResponseDTO(emailNinja);
+    }
+
+
+
+
+
+
     // Mapper: RequestDTO -> Entity
     private Ninja toEntity(NinjaRequestDTO dto) {
         Ninja ninja = new Ninja();
@@ -79,6 +137,11 @@ public class ServiceNinja {
 
         return ninja;
     }
+
+
+
+
+
 
     // Mapper: Entity -> ResponseDTO
     private NinjaResponseDTO toResponseDTO(Ninja ninja) {
