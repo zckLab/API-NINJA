@@ -47,19 +47,19 @@ public class ServiceNinja {
     // 4. Update
     public NinjaResponseDTO updateNinja(Long id, NinjaRequestDTO ninjaDTO) {
 
-        Ninja ninjaExistente = repositoryNinja.findById(id)
+        Ninja ninjaExisting = repositoryNinja.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ninja not found"));
 
-        ninjaExistente.setName(ninjaDTO.name());
-        ninjaExistente.setEmail(ninjaDTO.email());
-        ninjaExistente.setBirthDate(ninjaDTO.birthDate());
-        ninjaExistente.setCategory(ninjaDTO.category());
-        ninjaExistente.setAbility(ninjaDTO.ability());
-        ninjaExistente.setElementals(ninjaDTO.elementals());
-        ninjaExistente.setRank(ninjaDTO.rank());
-        ninjaExistente.setDescription(ninjaDTO.description());
+        ninjaExisting.setName(ninjaDTO.name());
+        ninjaExisting.setEmail(ninjaDTO.email());
+        ninjaExisting.setBirthDate(ninjaDTO.birthDate());
+        ninjaExisting.setCategory(ninjaDTO.category());
+        ninjaExisting.setAbility(ninjaDTO.ability());
+        ninjaExisting.setElementals(ninjaDTO.elementals());
+        ninjaExisting.setRank(ninjaDTO.rank());
+        ninjaExisting.setDescription(ninjaDTO.description());
 
-        return toResponseDTO(repositoryNinja.save(ninjaExistente));
+        return toResponseDTO(repositoryNinja.save(ninjaExisting));
     }
 
     // Mapper: RequestDTO -> Entity
