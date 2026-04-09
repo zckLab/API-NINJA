@@ -5,5 +5,5 @@ public enum Ability {
     TAIJUTSU,
     GENJUTSU,
     SENSORIAL,
-    MEDICO
+    MEDIC
 }
