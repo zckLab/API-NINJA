@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public record NinjaResponseDTO(
         Long id,
         String name,
+        String cpf,
         String email,
         LocalDate birthDate,
         Category category,
