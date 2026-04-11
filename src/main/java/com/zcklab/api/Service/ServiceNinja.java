@@ -5,7 +5,9 @@ import com.zcklab.api.Repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,7 +62,7 @@ public class ServiceNinja {
     // A conditional statement that, if it does not exist, returns a RuntimeException.
     public void deleteNinja(Long id) {
         if (!repositoryNinja.existsById(id)) {
-            throw new RuntimeException("Ninja not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja not found");
         }
         repositoryNinja.deleteById(id);
     }
@@ -74,7 +76,7 @@ public class ServiceNinja {
     public NinjaResponseDTO updateNinja(Long id, NinjaRequestDTO ninjaDTO) {
 
         Ninja ninjaExisting = repositoryNinja.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ninja not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja not found"));
 
         ninjaExisting.setName(ninjaDTO.name());
         ninjaExisting.setCpf(ninjaDTO.cpf());
