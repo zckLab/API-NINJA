@@ -25,7 +25,10 @@ public class NinjaController {
     // Here are the 4 methods for a REST API.
 
 
-
+    @GetMapping
+    public String Hello(){
+        return "Hello Ninja!";
+    }
 
 
     // Here, we use the findAllNinjas method from the Service.
