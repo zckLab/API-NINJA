@@ -41,4 +41,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 
     }
+
+    @ExceptionHandler(NinjaNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNinjaNotFound(NinjaNotFoundException e) {
+        ErrorResponse error = new ErrorResponse();
+
+        error.addError(new Error("ninja_list", e.getMessage())); //FROM THE LINE throw new NinjaNotFoundException("Ninja not found"); on service
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
 }
