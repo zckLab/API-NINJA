@@ -4,6 +4,7 @@ import com.zcklab.api.Model.Ninja;
 import com.zcklab.api.Repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
+import com.zcklab.api.handler.NinjaNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,10 +32,17 @@ public class ServiceNinja {
 
     // 1. Find All
     public List<NinjaResponseDTO> findAllNinjas() {
-        return repositoryNinja.findAll()
+
+       List<NinjaResponseDTO> ninjas = repositoryNinja.findAll()
                 .stream()
                 .map(this::toResponseDTO)
                 .collect(Collectors.toList());
+
+               if (ninjas.isEmpty()) {
+                   throw new NinjaNotFoundException("Ninja not found");
+               }
+
+                return ninjas;
     }
 
 
