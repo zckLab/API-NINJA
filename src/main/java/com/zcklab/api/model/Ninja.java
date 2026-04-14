@@ -1,7 +1,7 @@
-package com.zcklab.api.Model;
+package com.zcklab.api.model;
 
 
-import com.zcklab.api.Enums.*;
+import com.zcklab.api.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 

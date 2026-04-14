@@ -1,13 +1,7 @@
 package com.zcklab.api;
 
-import com.zcklab.api.Enums.Category;
-import com.zcklab.api.Enums.Elementals;
-import com.zcklab.api.Enums.Rank;
-import com.zcklab.api.Model.Ninja;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Collections;
 
 
 @SpringBootApplication

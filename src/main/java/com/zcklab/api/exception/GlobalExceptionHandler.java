@@ -1,5 +1,8 @@
-package com.zcklab.api.handler;
+package com.zcklab.api.exception;
 
+import com.zcklab.api.handler.Error;
+import com.zcklab.api.handler.ErrorResponse;
+import com.zcklab.api.handler.NinjaNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -32,7 +35,7 @@ public class GlobalExceptionHandler {
 
             String message = item.getDefaultMessage(); // self-explanatory, item picks up the default message
 
-            response.addError(new Error(field, message)); // We call the addError method with the parameters created above
+            response.addError(new com.zcklab.api.handler.Error(field, message)); // We call the addError method with the parameters created above
         });
 
 

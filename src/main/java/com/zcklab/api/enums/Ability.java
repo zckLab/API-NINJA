@@ -1,4 +1,4 @@
-package com.zcklab.api.Enums;
+package com.zcklab.api.enums;
 
 public enum Ability {
     NINJUTSU,

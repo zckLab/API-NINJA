@@ -1,9 +1,9 @@
 package com.zcklab.api.dto;
 
-import com.zcklab.api.Enums.Ability;
-import com.zcklab.api.Enums.Category;
-import com.zcklab.api.Enums.Elementals;
-import com.zcklab.api.Enums.Rank;
+import com.zcklab.api.enums.Ability;
+import com.zcklab.api.enums.Category;
+import com.zcklab.api.enums.Elementals;
+import com.zcklab.api.enums.Rank;
 
 import java.time.LocalDate;
 

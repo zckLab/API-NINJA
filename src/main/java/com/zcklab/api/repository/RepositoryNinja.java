@@ -1,6 +1,6 @@
-package com.zcklab.api.Repository;
+package com.zcklab.api.repository;
 
-import com.zcklab.api.Model.Ninja;
+import com.zcklab.api.model.Ninja;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

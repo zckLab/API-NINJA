@@ -2,7 +2,7 @@ package com.zcklab.api.Controller;
 
 
 
-import com.zcklab.api.Service.ServiceNinja;
+import com.zcklab.api.service.ServiceNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import jakarta.validation.Valid;

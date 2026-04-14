@@ -1,7 +1,7 @@
-package com.zcklab.api.Service;
+package com.zcklab.api.service;
 
-import com.zcklab.api.Model.Ninja;
-import com.zcklab.api.Repository.RepositoryNinja;
+import com.zcklab.api.model.Ninja;
+import com.zcklab.api.repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import com.zcklab.api.handler.NinjaNotFoundException;
