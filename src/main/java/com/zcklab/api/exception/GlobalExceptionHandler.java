@@ -1,6 +1,5 @@
 package com.zcklab.api.exception;
 
-import com.zcklab.api.handler.Error;
 import com.zcklab.api.handler.ErrorResponse;
 import com.zcklab.api.handler.NinjaNotFoundException;
 import com.zcklab.api.handler.ParamsNotFoundException;
@@ -51,7 +50,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleNinjaNotFound(NinjaNotFoundException e) {
         ErrorResponse error = new ErrorResponse();
 
-        error.addError(new Error("ninja_list", e.getMessage())); //FROM THE LINE throw new NinjaNotFoundException("Ninja not found"); on service
+        error.addError(new com.zcklab.api.handler.Error("ninja_list", e.getMessage())); //FROM THE LINE throw new NinjaNotFoundException("Ninja not found"); on service
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
@@ -60,7 +59,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleParamsNotFound(ParamsNotFoundException e){
         ErrorResponse error = new ErrorResponse();
 
-        error.addError(new Error("params_list", e.getMessage()));
+        error.addError(new com.zcklab.api.handler.Error("params_list", e.getMessage()));
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
