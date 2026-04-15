@@ -11,7 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@RestControllerAdvice //Because of this annotation, we don't need to write anything else
+                     // in the controller or the service; Spring Boot takes care of it
 public class GlobalExceptionHandler {
 
 
