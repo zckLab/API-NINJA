@@ -2,6 +2,7 @@ package com.zcklab.api.handler;
 
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +10,13 @@ import java.util.List;
 @Getter
 public class ErrorResponse {
 
+    private final LocalDateTime timestamp;
     private final List<Error> errors; //create a List named errors from the class Error
+
 
     public ErrorResponse(){ //constructor to create a new ArrayList for the list errors
         this.errors = new ArrayList<>();
+        this.timestamp = LocalDateTime.now();
     }
 
 
