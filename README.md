@@ -25,12 +25,13 @@ Key learning objectives included:
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| POST | /ninjas/registerninja | Registers a new ninja. |
-| GET | /ninjas/listninjas | Retrieves a list of all registered ninjas. |
-| PUT | /ninjas/{id} | Updates information for an existing ninja. |
-| DELETE | /ninjas/{id} | Removes a ninja record from the system. |
+| Method | Endpoint           | Description                                |
+|:-------|:-------------------|:-------------------------------------------|
+| POST   | /api/v1/users      | Registers a new ninja.                     |
+| GET    | /api/v1/users      | Retrieves a list of all registered ninjas. |
+| PUT    | /api/v1/users/{id} | Updates information for an existing ninja. |
+| DELETE | /api/v1/users/{id} | Removes a ninja record from the system.    |
+| GET    | /api/v1/users | Retrieves names and email .                |
 
 ### Request Example (POST)
 ```json
