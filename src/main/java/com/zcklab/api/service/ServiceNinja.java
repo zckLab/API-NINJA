@@ -111,7 +111,7 @@ public class ServiceNinja {
     // method in the repository. We throw a `RuntimeException` if the value is null.
     public NinjaResponseDTO findByName(String name) {
         Ninja nameNinja = repositoryNinja.findByName(name)
-                .orElseThrow(() -> new RuntimeException("Ninja not found"));
+                .orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
         return toResponseDTO(nameNinja); // If everything is OK, we return the `toEntity` method to `nameNinja`.
     }
@@ -121,7 +121,7 @@ public class ServiceNinja {
 
 
     public NinjaResponseDTO findByEmail(String email) {
-        Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new RuntimeException("Ninja not found"));
+        Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
         return toResponseDTO(emailNinja);
     }
