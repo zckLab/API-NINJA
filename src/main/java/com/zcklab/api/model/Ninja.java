@@ -7,6 +7,7 @@ import lombok.*;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -55,6 +56,11 @@ public class Ninja {
     @Column(name = "usr_rank", nullable = false)
     @Enumerated(EnumType.STRING)
     private Rank rank;
+
+
+    @Column(nullable = false)
+    @OneToMany(mappedBy = "ninja") //one ninja can have a lot of missions
+    private List<Missions>  missions;
 
 
     @Column(name = "usr_description", nullable = false, length = 120)

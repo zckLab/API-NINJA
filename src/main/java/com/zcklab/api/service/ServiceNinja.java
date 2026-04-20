@@ -1,5 +1,7 @@
 package com.zcklab.api.service;
 
+import com.zcklab.api.dto.MissionsResponseDTO;
+import com.zcklab.api.model.Missions;
 import com.zcklab.api.model.Ninja;
 import com.zcklab.api.repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
@@ -150,11 +152,29 @@ public class ServiceNinja {
 
 
 
+    private MissionsResponseDTO toMissionDTO(Missions mission) {
+        //Transform every single Mission (entity) in MissionsResponseDTO
+        return new MissionsResponseDTO(
+                mission.getId(),
+                mission.getMissionName(),
+                mission.getMissionDescription()
+        );
+    }
+
 
 
 
     // Mapper: Entity -> ResponseDTO
     private NinjaResponseDTO toResponseDTO(Ninja ninja) {
+
+
+        // Get Missions of ninja, construct in MissionDTO and List
+        List<MissionsResponseDTO> missions = ninja.getMissions()
+                .stream()
+                .map(this::toMissionDTO)
+                .collect(Collectors.toList());
+
+
         return new NinjaResponseDTO(
                 ninja.getId(),
                 ninja.getName(),
@@ -165,6 +185,7 @@ public class ServiceNinja {
                 ninja.getAbility(),
                 ninja.getElementals(),
                 ninja.getRank(),
+                missions, //return the MissionDTO
                 ninja.getDescription()
 
         );

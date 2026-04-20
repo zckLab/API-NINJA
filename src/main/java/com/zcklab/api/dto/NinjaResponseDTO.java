@@ -6,6 +6,7 @@ import com.zcklab.api.enums.Elementals;
 import com.zcklab.api.enums.Rank;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record NinjaResponseDTO(
         Long id,
@@ -17,5 +18,6 @@ public record NinjaResponseDTO(
         Ability ability,
         Elementals elementals,
         Rank rank,
+        List<MissionsResponseDTO> missions,
         String description
 ){}
