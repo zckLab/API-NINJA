@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Missions {
+public class Missions { // Many missions can be assigned to a single ninja
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,9 @@ public class Missions {
     private String MissionName;
     private String MissionDescription;
 
-    @ManyToOne // Many missions can be assigned to a single ninja
+    // Think about it, if we only want to view the missions,
+    // it would be inconvenient to show all the ninjas attached to them. Nobody asked for that crap,
+    // so Lazy Loading does it for us
+    @ManyToOne(fetch = FetchType.LAZY)
     private Ninja ninja;
 }
