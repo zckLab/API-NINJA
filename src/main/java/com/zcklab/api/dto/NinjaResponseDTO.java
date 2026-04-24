@@ -22,5 +22,6 @@ public record NinjaResponseDTO(
         Rank rank,
         List<MissionsDTO> missions,
         NearbyVillageDTO nearbyVillages,
+        List<ClanDTO> clans,
         String description
 ){}
