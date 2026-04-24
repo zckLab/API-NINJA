@@ -1,9 +1,6 @@
 package com.zcklab.api.model;
 
-import com.zcklab.api.dto.MissionsDTO;
-import com.zcklab.api.dto.NearbyVillageDTO;
-import com.zcklab.api.dto.NinjaRequestDTO;
-import com.zcklab.api.dto.NinjaResponseDTO;
+import com.zcklab.api.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -22,4 +19,7 @@ public interface NinjaMapper {
 
     @Mapping(source = "name", target = "VillageName")
     NearbyVillageDTO toNearbyDTO(NearbyVillages nearbyVillages);
+
+
+    ClanDTO toClanDTO(Clan clan);
 }
