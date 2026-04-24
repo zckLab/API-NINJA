@@ -4,10 +4,12 @@ import com.zcklab.api.enums.Ability;
 import com.zcklab.api.enums.Category;
 import com.zcklab.api.enums.Elementals;
 import com.zcklab.api.enums.Rank;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 public record NinjaResponseDTO(
         Long id,
         String name,
@@ -19,5 +21,6 @@ public record NinjaResponseDTO(
         Elementals elementals,
         Rank rank,
         List<MissionsResponseDTO> missions,
+        NearbyVillageDTO nearbyVillages,
         String description
 ){}

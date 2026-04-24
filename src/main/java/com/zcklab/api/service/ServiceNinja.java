@@ -1,8 +1,11 @@
 package com.zcklab.api.service;
 
 import com.zcklab.api.dto.MissionsResponseDTO;
+import com.zcklab.api.dto.NearbyVillageDTO;
 import com.zcklab.api.model.Missions;
+import com.zcklab.api.model.NearbyVillages;
 import com.zcklab.api.model.Ninja;
+import com.zcklab.api.model.NinjaMapper;
 import com.zcklab.api.repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
 public class ServiceNinja {
 
     private final RepositoryNinja repositoryNinja;
-
+    private final NinjaMapper ninjaMapper;
 
 
     // Anything that goes to a method that returns something will always be a Response,
@@ -34,17 +37,15 @@ public class ServiceNinja {
 
     // 1. Find All
     public List<NinjaResponseDTO> findAllNinjas() {
+        List<Ninja> ninjas = repositoryNinja.findAll();
 
-       List<NinjaResponseDTO> ninjas = repositoryNinja.findAll()
-                .stream()
-                .map(this::toResponseDTO)
+        if (ninjas.isEmpty()) {
+            throw new NinjaNotFoundException("Ninja not found");
+        }
+
+                return ninjas.stream()
+                .map(ninjaMapper::toResponseNinjaDTO)
                 .collect(Collectors.toList());
-
-               if (ninjas.isEmpty()) {
-                   throw new NinjaNotFoundException("Ninja not found");
-               }
-
-                return ninjas;
     }
 
 
@@ -59,7 +60,7 @@ public class ServiceNinja {
 
         Ninja ninjaSaved = repositoryNinja.save(ninjaConverted);
 
-        return toResponseDTO(ninjaSaved);
+        return ninjaMapper.toResponseNinjaDTO(ninjaSaved);
     }
 
 
@@ -98,7 +99,7 @@ public class ServiceNinja {
         ninjaExisting.setRank(ninjaDTO.rank());
         ninjaExisting.setDescription(ninjaDTO.description());
 
-        return toResponseDTO(repositoryNinja.save(ninjaExisting));
+        return ninjaMapper.toResponseNinjaDTO(repositoryNinja.save(ninjaExisting));
     }
 
 
@@ -115,7 +116,7 @@ public class ServiceNinja {
         Ninja nameNinja = repositoryNinja.findByName(name)
                 .orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
-        return toResponseDTO(nameNinja); // If everything is OK, we return the `toEntity` method to `nameNinja`.
+        return ninjaMapper.toResponseNinjaDTO(nameNinja); // If everything is OK, we return the `toResponse` method to `nameNinja`.
     }
 
 
@@ -125,7 +126,7 @@ public class ServiceNinja {
     public NinjaResponseDTO findByEmail(String email) {
         Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
-        return toResponseDTO(emailNinja);
+        return ninjaMapper.toResponseNinjaDTO(emailNinja);
     }
 
 
@@ -148,46 +149,5 @@ public class ServiceNinja {
         ninja.setDescription(dto.description());
 
         return ninja;
-    }
-
-
-
-    private MissionsResponseDTO toMissionDTO(Missions mission) {
-        //Transform every single Mission (entity) in MissionsResponseDTO
-        return new MissionsResponseDTO(
-                mission.getId(),
-                mission.getMissionName(),
-                mission.getMissionDescription()
-        );
-    }
-
-
-
-
-    // Mapper: Entity -> ResponseDTO
-    private NinjaResponseDTO toResponseDTO(Ninja ninja) {
-
-
-        // Get Missions of ninja, construct in MissionDTO and List
-        List<MissionsResponseDTO> missions = ninja.getMissions()
-                .stream()
-                .map(this::toMissionDTO)
-                .collect(Collectors.toList());
-
-
-        return new NinjaResponseDTO(
-                ninja.getId(),
-                ninja.getName(),
-                ninja.getCpf(),
-                ninja.getEmail(),
-                ninja.getBirthDate(),
-                ninja.getCategory(),
-                ninja.getAbility(),
-                ninja.getElementals(),
-                ninja.getRank(),
-                missions, //return the MissionDTO
-                ninja.getDescription()
-
-        );
     }
 }
