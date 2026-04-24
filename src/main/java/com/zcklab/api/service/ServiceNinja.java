@@ -56,7 +56,7 @@ public class ServiceNinja {
     // 2. Create
     public NinjaResponseDTO createNinja(NinjaRequestDTO ninjaDTO) {
 
-        Ninja ninjaConverted = toEntity(ninjaDTO);
+        Ninja ninjaConverted = ninjaMapper.toEntity(ninjaDTO);
 
         Ninja ninjaSaved = repositoryNinja.save(ninjaConverted);
 
@@ -122,32 +122,10 @@ public class ServiceNinja {
 
 
 
-
+    // 6. Search by email
     public NinjaResponseDTO findByEmail(String email) {
         Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
         return ninjaMapper.toResponseNinjaDTO(emailNinja);
-    }
-
-
-
-
-
-
-    // Mapper: RequestDTO -> Entity
-    private Ninja toEntity(NinjaRequestDTO dto) {
-        Ninja ninja = new Ninja();
-
-        ninja.setName(dto.name());
-        ninja.setCpf(dto.cpf());
-        ninja.setEmail(dto.email());
-        ninja.setBirthDate(dto.birthDate());
-        ninja.setCategory(dto.category());
-        ninja.setAbility(dto.ability());
-        ninja.setElementals(dto.elementals());
-        ninja.setRank(dto.rank());
-        ninja.setDescription(dto.description());
-
-        return ninja;
     }
 }
