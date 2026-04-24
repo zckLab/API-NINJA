@@ -20,7 +20,7 @@ public record NinjaResponseDTO(
         Ability ability,
         Elementals elementals,
         Rank rank,
-        List<MissionsResponseDTO> missions,
+        List<MissionsDTO> missions,
         NearbyVillageDTO nearbyVillages,
         String description
 ){}

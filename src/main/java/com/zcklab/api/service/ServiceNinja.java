@@ -1,9 +1,5 @@
 package com.zcklab.api.service;
 
-import com.zcklab.api.dto.MissionsResponseDTO;
-import com.zcklab.api.dto.NearbyVillageDTO;
-import com.zcklab.api.model.Missions;
-import com.zcklab.api.model.NearbyVillages;
 import com.zcklab.api.model.Ninja;
 import com.zcklab.api.model.NinjaMapper;
 import com.zcklab.api.repository.RepositoryNinja;

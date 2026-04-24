@@ -1,6 +1,6 @@
 package com.zcklab.api.dto;
 
-public record MissionsResponseDTO(
+public record MissionsDTO(
         Long id,
         String MissionName,
         String MissionDescription

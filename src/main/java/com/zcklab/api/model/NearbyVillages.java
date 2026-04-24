@@ -12,7 +12,7 @@ public class NearbyVillages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String VillageName;
+    private String name;
     private Long population;
 
     @ManyToOne(fetch = FetchType.LAZY)
