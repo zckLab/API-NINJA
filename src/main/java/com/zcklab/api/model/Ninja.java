@@ -59,12 +59,16 @@ public class Ninja {
 
 
     @Column(nullable = false)
-    @OneToMany(mappedBy = "ninja") //one ninja can have a lot of missions
+    @OneToMany(mappedBy = "ninja_missions") //one ninja can have a lot of missions
     private List<Missions>  missions;
 
     @Column(nullable = false)
-    @OneToMany(mappedBy = "ninja")
+    @OneToMany(mappedBy = "ninja_nearby_villages")
     private List<NearbyVillages>  nearbyVillages;
+
+    @Column(nullable = false)
+    @ManyToMany(mappedBy = "ninja_clans")
+    private List<Clan> clans;
 
 
     @Column(name = "usr_description", nullable = false, length = 120)
