@@ -8,6 +8,7 @@ import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class NinjaController {
 
     @GetMapping("/health") // GET /api/v1/users/health
     public ResponseEntity<String> Health(){
+
         return ResponseEntity.ok("API is running...");
     }
 
@@ -37,8 +39,11 @@ public class NinjaController {
     // It gets all entities, transforms each one using the toResponseDTO method (to safely convert the model into a response),
     // and then returns everything as a list.
     @GetMapping // GET /api/v1/users
-    public ResponseEntity<List<NinjaResponseDTO>> getAllNinjas(){
-        return ResponseEntity.ok(serviceNinja.findAllNinjas()); // Return 200
+    public ResponseEntity<Page<NinjaResponseDTO>> getAllNinjas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int items
+    ) {
+        return ResponseEntity.ok(serviceNinja.findAllNinjas(page, items));
     }
 
 

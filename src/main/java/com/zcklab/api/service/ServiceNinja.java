@@ -7,6 +7,9 @@ import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import com.zcklab.api.handler.NinjaNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,16 +35,13 @@ public class ServiceNinja {
 
 
     // 1. Find All
-    public List<NinjaResponseDTO> findAllNinjas() {
-        List<Ninja> ninjas = repositoryNinja.findAll();
+    public Page<NinjaResponseDTO> findAllNinjas(int page, int items) {
 
-        if (ninjas.isEmpty()) {
-            throw new NinjaNotFoundException("Ninja not found");
-        }
+        Pageable pageable = PageRequest.of(page, items);
 
-                return ninjas.stream()
-                .map(ninjaMapper::toResponseNinjaDTO)
-                .collect(Collectors.toList());
+        Page<Ninja> ninjasPage = repositoryNinja.findAll(pageable);
+
+        return ninjasPage.map(ninjaMapper::toResponseNinjaDTO);
     }
 
 
