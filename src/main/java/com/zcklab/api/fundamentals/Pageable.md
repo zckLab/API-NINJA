@@ -247,16 +247,72 @@ Pagination with `Pageable`:
 
 ---
 
-## 📌 Next steps
+## 🔽 Add Sorting with `Sort`
 
-* Add sorting:
+`Sort` defines the order in which data is returned from the database.
+Without it, the database does **not guarantee any ordering**.
+
+---
+
+### ✅ Example (current implementation)
 
 ```java
-PageRequest.of(page, items, Sort.by("name").ascending());
+PageRequest.of(
+    page,
+    items,
+    Sort.by("name").ascending()
+        .and(Sort.by("email").ascending())
+);
 ```
 
-* Use `Pageable` directly in the controller
+#### 📌 Explanation
 
-* Implement filtering with `Specification`
+* First, data is sorted by `name` in ascending order (A → Z)
+* If multiple records share the same `name`, a secondary sort is applied using `email`
+* Since `email` is unique, it guarantees a **fully deterministic order**
+* No additional tie-breakers are required
+
+---
+
+### 🚀 Professional Example (dynamic sorting)
+
+Instead of hardcoding sorting logic, a more flexible approach is to let the client define it:
+
+#### Controller
+
+```java
+@GetMapping
+public ResponseEntity<Page<NinjaResponseDTO>> getAllNinjas(Pageable pageable) {
+    return ResponseEntity.ok(serviceNinja.findAllNinjas(pageable));
+}
+```
+
+#### Service
+
+```java
+public Page<NinjaResponseDTO> findAllNinjas(Pageable pageable) {
+    return repositoryNinja.findAll(pageable)
+            .map(ninjaMapper::toResponseNinjaDTO);
+}
+```
+
+#### Request Example
+
+```
+/api/v1/users?page=0&size=10&sort=name,asc&sort=email,asc
+```
+
+---
+
+### 🧠 Key Concept
+
+> Using a unique field (such as email) as a secondary sort key ensures deterministic ordering when the primary field contains duplicate values.
+
+---
+
+### 🔧 Additional Improvements
+
+* Use `Pageable` directly in the controller for more flexibility
+* Implement filtering with `Specification` for advanced queries
 
 ---

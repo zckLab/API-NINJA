@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,7 +38,12 @@ public class ServiceNinja {
     // 1. Find All
     public Page<NinjaResponseDTO> findAllNinjas(int page, int items) {
 
-        Pageable pageable = PageRequest.of(page, items);
+        Pageable pageable = PageRequest.of(
+                page,
+                items,
+                Sort.by("name").ascending()
+                        .and(Sort.by("email").ascending())
+        );
 
         Page<Ninja> ninjasPage = repositoryNinja.findAll(pageable);
 

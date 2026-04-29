@@ -41,8 +41,8 @@ public class NinjaController {
     @GetMapping // GET /api/v1/users
     public ResponseEntity<Page<NinjaResponseDTO>> getAllNinjas(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int items
-    ) {
+            @RequestParam(defaultValue = "10") int items)
+    {
         return ResponseEntity.ok(serviceNinja.findAllNinjas(page, items));
     }
 
