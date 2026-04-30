@@ -93,6 +93,7 @@ public class ServiceNinja {
 
         ninjaExisting.setName(ninjaDTO.name());
         ninjaExisting.setCpf(ninjaDTO.cpf());
+        ninjaExisting.setAge(ninjaDTO.age());
         ninjaExisting.setEmail(ninjaDTO.email());
         ninjaExisting.setBirthDate(ninjaDTO.birthDate());
         ninjaExisting.setCategory(ninjaDTO.category());
@@ -129,5 +130,10 @@ public class ServiceNinja {
         Ninja emailNinja = repositoryNinja.findByEmail(email).orElseThrow(() -> new NinjaNotFoundException("Ninja not found"));
 
         return ninjaMapper.toResponseNinjaDTO(emailNinja);
+    }
+
+    // 7. Find All Emails
+    public List<String> findAllMails() {
+        return repositoryNinja.findAllEmails();
     }
 }

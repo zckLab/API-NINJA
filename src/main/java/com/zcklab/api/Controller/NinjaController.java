@@ -78,6 +78,14 @@ public class NinjaController {
 
 
 
+    @GetMapping
+    public ResponseEntity<List<String>> getAllEmails(){
+        return ResponseEntity.ok(serviceNinja.findAllMails());
+    }
+
+
+
+
 
     // Without the @Valid attribute, the request would be accepted without meeting the RequestDTO requirements.
     //We created a ResponseDTO that calls the createNinja method.

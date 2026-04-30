@@ -13,6 +13,7 @@ import java.util.List;
 public record NinjaResponseDTO(
         Long id,
         String name,
+        int age,
         String cpf,
         String email,
         LocalDate birthDate,

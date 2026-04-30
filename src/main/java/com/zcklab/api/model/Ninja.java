@@ -30,6 +30,9 @@ public class Ninja {
     @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = false)
+    private Integer age;
+
 
     @Column(name = "usr_email", nullable = false, unique = true)
     private String email;

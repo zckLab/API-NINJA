@@ -21,6 +21,10 @@ public record NinjaRequestDTO(
         @CPF(message = "CPF is Required") //This is a brazilian validation for the CPF(Brazilian tax identification number)
         String cpf,
 
+        @NotNull
+        @Min(value = 0, message = "Age need to be positive")
+        Integer age,
+
         @NotBlank(message = "Email is required")
         @Email(message = "Invalid Email Format")
         String email,
