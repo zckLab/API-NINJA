@@ -77,4 +77,7 @@ public class Ninja {
     @Column(name = "usr_description", nullable = false, length = 120)
     private String description;
 
+    @Column(nullable = false)
+    private  Boolean active;
+
 }
