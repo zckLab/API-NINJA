@@ -24,5 +24,6 @@ public record NinjaResponseDTO(
         List<MissionsDTO> missions,
         NearbyVillageDTO nearbyVillages,
         List<ClanDTO> clans,
-        String description
+        String description,
+        Boolean active
 ){}
