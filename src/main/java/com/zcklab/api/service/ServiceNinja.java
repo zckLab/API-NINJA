@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -135,5 +134,23 @@ public class ServiceNinja {
     // 7. Find All Emails
     public List<String> findAllMails() {
         return repositoryNinja.findAllEmails();
+    }
+
+
+
+
+
+    // 8. Find Active Adults
+    public Page<NinjaResponseDTO> activeAdults(int page, int items) {
+
+        Pageable pageable = PageRequest.of(
+                page,
+                items,
+                Sort.by("name").ascending()
+                        .and(Sort.by("email").ascending()));
+
+        Page<Ninja> ninjasPage = repositoryNinja.findActiveAdults(pageable);
+
+        return ninjasPage.map(ninjaMapper::toResponseNinjaDTO);
     }
 }
