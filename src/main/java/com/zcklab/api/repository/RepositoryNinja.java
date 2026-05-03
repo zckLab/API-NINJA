@@ -47,4 +47,7 @@ public interface RepositoryNinja extends JpaRepository<Ninja, Long> {
     @Query(value = "SELECT * FROM tb_ninjas WHERE active = true AND usr_category = :category", nativeQuery = true)
     List<Ninja> findByStatusAndCategory(@Param("category") Category category);
 
+    @Query(value = "SELECT COUNT(DISTINCT clans_id) FROM ninja_clans", nativeQuery = true)
+    Long countClans(); //e.g: If we have a total of 512 clans, it will return the number 512.
+
 }
