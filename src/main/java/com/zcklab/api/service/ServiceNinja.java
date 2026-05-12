@@ -1,7 +1,11 @@
 package com.zcklab.api.service;
 
+import com.zcklab.api.dto.ClanCreateDTO;
+import com.zcklab.api.dto.ClanDTO;
+import com.zcklab.api.model.Clan;
 import com.zcklab.api.model.Ninja;
 import com.zcklab.api.model.NinjaMapper;
+import com.zcklab.api.repository.ClanRepository;
 import com.zcklab.api.repository.RepositoryNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
@@ -23,6 +27,7 @@ public class ServiceNinja {
 
     private final RepositoryNinja repositoryNinja;
     private final NinjaMapper ninjaMapper;
+    private final ClanRepository repositoryClan;
 
 
     // Anything that goes to a method that returns something will always be a Response,
@@ -64,6 +69,24 @@ public class ServiceNinja {
         return ninjaMapper.toResponseNinjaDTO(ninjaSaved);
     }
 
+
+    public ClanDTO createClan(ClanCreateDTO dto) {
+
+        List<Ninja> ninjas = repositoryNinja.findAllById(dto.ninjaIds());
+
+        Clan clan = new Clan();
+        clan.setName(dto.name());
+        clan.setPopulation(dto.population());
+        clan.setNinja_clans(ninjas);
+
+        Clan savedClan = repositoryClan.save(clan);
+
+        return new ClanDTO(
+                savedClan.getId(),
+                savedClan.getName(),
+                savedClan.getPopulation()
+        );
+    }
 
 
 
@@ -133,24 +156,11 @@ public class ServiceNinja {
 
     // 7. Find All Emails
     public List<String> findAllMails() {
+
         return repositoryNinja.findAllEmails();
     }
 
 
 
 
-
-    // 8. Find Active Adults
-    public Page<NinjaResponseDTO> activeAdults(int page, int items) {
-
-        Pageable pageable = PageRequest.of(
-                page,
-                items,
-                Sort.by("name").ascending()
-                        .and(Sort.by("email").ascending()));
-
-        Page<Ninja> ninjasPage = repositoryNinja.findActiveAdults(pageable);
-
-        return ninjasPage.map(ninjaMapper::toResponseNinjaDTO);
-    }
 }

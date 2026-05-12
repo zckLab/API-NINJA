@@ -2,6 +2,8 @@ package com.zcklab.api.Controller;
 
 
 
+import com.zcklab.api.dto.ClanCreateDTO;
+import com.zcklab.api.dto.ClanDTO;
 import com.zcklab.api.handler.ParamsNotFoundException;
 import com.zcklab.api.service.ServiceNinja;
 import com.zcklab.api.dto.NinjaRequestDTO;
@@ -25,7 +27,6 @@ public class NinjaController {
 
 
     // ResponseEntity is used to display HTTP protocols correctly.
-    // Here are the 4 methods for a REST API.
 
 
     @GetMapping("/health") // GET /api/v1/users/health
@@ -38,7 +39,7 @@ public class NinjaController {
     // Here, we use the findAllNinjas method from the Service.
     // It gets all entities, transforms each one using the toResponseDTO method (to safely convert the model into a response),
     // and then returns everything as a list.
-    @GetMapping // GET /api/v1/users
+    @GetMapping("/get/ninjas") // GET /api/v1/users/get/ninjas
     public ResponseEntity<Page<NinjaResponseDTO>> getAllNinjas(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int items)
@@ -51,7 +52,7 @@ public class NinjaController {
 
 
 
-    @GetMapping // GET /api/v1/users
+    @GetMapping("/get/ninjas/") // GET /api/v1/users/get/ninjas/
     public ResponseEntity<List<NinjaResponseDTO>> getNinjasByNameAndEmail(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String email) {
@@ -78,19 +79,13 @@ public class NinjaController {
 
 
 
-    @GetMapping
+    @GetMapping("/get/emails")
     public ResponseEntity<List<String>> getAllEmails(){
         return ResponseEntity.ok(serviceNinja.findAllMails());
     }
 
 
-    @GetMapping
-    public ResponseEntity<Page<NinjaResponseDTO>> getActiveAdults(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int items
-    ) {
-        return ResponseEntity.ok(serviceNinja.activeAdults(page, items));
-    }
+
 
 
 
@@ -98,13 +93,18 @@ public class NinjaController {
     //We created a ResponseDTO that calls the createNinja method.
     // It receives the Request, uses toEntity to convert it to Entity, and then toResponse to transform it into ResponseDTO,
     // returning the result (This may seem confusing at first glance)
-    @PostMapping // GET /api/v1/users
+    @PostMapping("/create/ninja") // GET /api/v1/users/create/ninja
     public ResponseEntity<NinjaResponseDTO> createNinja(@RequestBody @Valid NinjaRequestDTO ninjaDTO){
         NinjaResponseDTO newNinja = serviceNinja.createNinja(ninjaDTO);
         return new ResponseEntity<>(newNinja, HttpStatus.CREATED); // Return 201
     }
 
 
+    @PostMapping("/create/clan")
+    public ResponseEntity<ClanDTO> createClan (@RequestBody @Valid ClanCreateDTO dto) {
+        ClanDTO newClan = serviceNinja.createClan(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newClan);
+    }
 
 
 

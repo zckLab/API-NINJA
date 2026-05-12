@@ -18,7 +18,7 @@ public record NinjaRequestDTO(
         String name,
 
         @NotBlank
-        @CPF(message = "CPF is Required") //This is a brazilian validation for the CPF(Brazilian tax identification number)
+        @CPF(message = "CPF is Required and need to be Valid") //This is a brazilian validation for the CPF(Brazilian tax identification number)
         String cpf,
 
         @NotNull
@@ -49,11 +49,11 @@ public record NinjaRequestDTO(
         @NotEmpty(message = "Missions are Required")
         List<Long> missionId,
 
-        @NotEmpty(message = "Nearby Village are Required")
+        @NotNull(message = "Nearby Village are Required")
         Long nearbyVillageId,
 
-        @NotEmpty(message = "Clan is Required")
-        List<Long> clanId,
+        @NotNull(message = "Clan is Required")
+        Long clanId,
 
         @NotBlank(message = "Description is Required")
         @Size(max = 120, message = "Description should have a max of 120 characters" )

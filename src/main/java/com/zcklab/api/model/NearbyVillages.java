@@ -16,5 +16,5 @@ public class NearbyVillages {
     private Long population;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Ninja ninja;
+    private Ninja ninja_nearby_villages;
 }

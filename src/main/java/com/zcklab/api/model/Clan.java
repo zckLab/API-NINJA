@@ -20,5 +20,5 @@ public class Clan {
     private Long population;
 
     @ManyToMany
-    private List<Ninja> ninjas;
+    private List<Ninja> ninja_clans;
 }
