@@ -27,11 +27,10 @@ Key learning objectives included:
 
 | Method | Endpoint           | Description                                                     |
 |:-------|:-------------------|:----------------------------------------------------------------|
-| POST   | /api/v1/users      | Registers a new ninja.                                          |
-| GET    | /api/v1/users      | Retrieves a list of all registered ninjas.                      |
+| POST   | /api/v1/users/create/ninja      | Registers a new ninja.                                          |
+| GET    | /api/v1/users/get/ninjas      | Retrieves a list of all registered ninjas.                      |
 | PUT    | /api/v1/users/{id} | Updates information for an existing ninja.                      |
 | DELETE | /api/v1/users/{id} | Removes a ninja record from the system.                         |
-| GET    | /api/v1/users | Retrieves a list of parameters filtered to only name and email. |
 
 ### Request Example (POST)
 ```json
