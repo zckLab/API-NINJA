@@ -36,14 +36,19 @@ Key learning objectives included:
 ### Request Example (POST)
 ```json
 {
-  "name": "Ninja Tester",
-  "email": "ninja@ninja.com",
-  "birthDate": "1997-10-10",
-  "category": "MEDIC",
-  "ability": "NINJUTSU",
-  "elementals": "WIND",
+  "name": "Mr. Needlemouse",
+  "cpf": "72031656040",
+  "age": 22,
+  "email": "example@example.com",
+  "birthDate": "2004-12-12",
+  "category": "WARRIOR",
+  "ability": "SENSORIAL",
+  "elementals": "WATER",
   "rank": "PRO",
-  "description": "Aspiring Hokage"
+  "missionId" : [1, 2, 15],
+  "nearbyVillageId": 2,
+  "clanId": 12,
+  "description": "most wanted"
 }
 ```
 ## Gettind Started
