@@ -27,23 +27,27 @@ Key learning objectives included:
 
 | Method | Endpoint           | Description                                                     |
 |:-------|:-------------------|:----------------------------------------------------------------|
-| POST   | /api/v1/users      | Registers a new ninja.                                          |
-| GET    | /api/v1/users      | Retrieves a list of all registered ninjas.                      |
+| POST   | /api/v1/users/create/ninja      | Registers a new ninja.                                          |
+| GET    | /api/v1/users/get/ninjas      | Retrieves a list of all registered ninjas.                      |
 | PUT    | /api/v1/users/{id} | Updates information for an existing ninja.                      |
 | DELETE | /api/v1/users/{id} | Removes a ninja record from the system.                         |
-| GET    | /api/v1/users | Retrieves a list of parameters filtered to only name and email. |
 
 ### Request Example (POST)
 ```json
 {
-  "name": "Ninja Tester",
-  "email": "ninja@ninja.com",
-  "birthDate": "1997-10-10",
-  "category": "MEDIC",
-  "ability": "NINJUTSU",
-  "elementals": "WIND",
+  "name": "Mr. Needlemouse",
+  "cpf": "72031656040",
+  "age": 22,
+  "email": "example@example.com",
+  "birthDate": "2004-12-12",
+  "category": "WARRIOR",
+  "ability": "SENSORIAL",
+  "elementals": "WATER",
   "rank": "PRO",
-  "description": "Aspiring Hokage"
+  "missionId" : [1, 2, 15],
+  "nearbyVillageId": 2,
+  "clanId": 12,
+  "description": "most wanted"
 }
 ```
 ## Gettind Started
