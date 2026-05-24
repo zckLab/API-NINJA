@@ -16,5 +16,6 @@ public class NearbyVillages {
     private Long population;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nearby_id")
     private Ninja ninja_nearby_villages;
 }

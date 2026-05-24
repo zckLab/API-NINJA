@@ -22,5 +22,6 @@ public class Missions { // Many missions can be assigned to a single ninja
     // it would be inconvenient to show all the ninjas attached to them. Nobody asked for that crap,
     // so Lazy Loading does it for us
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "missionId")
     private Ninja ninja_missions;
 }
