@@ -80,5 +80,4 @@ mvn spring-boot:run
 Planned security enhancements include:
 - Implementation of Spring Security (JWT Authentication)
 - API Rate Limiting
-- Comprehensive logging and activity monitoring
 ### Wait for the next releases!
