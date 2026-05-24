@@ -1,12 +1,9 @@
 package com.zcklab.api.repository;
 
-import com.zcklab.api.enums.Category;
 import com.zcklab.api.enums.Rank;
 import com.zcklab.api.model.Ninja;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -45,5 +42,8 @@ public interface RepositoryNinja extends JpaRepository<Ninja, Long> {
 
     @Query(value = "SELECT COUNT(DISTINCT clans_id) FROM ninja_clans", nativeQuery = true)
     Long countClans(); //e.g: If we have a total of 512 clans, it will return the number 512.
+
+    @Query("SELECT n FROM Ninja n JOIN FETCH n.clans")
+    List<Ninja> findAllWithClans();
 
 }
