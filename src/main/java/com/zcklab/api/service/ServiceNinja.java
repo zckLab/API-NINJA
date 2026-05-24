@@ -11,6 +11,8 @@ import com.zcklab.api.dto.NinjaRequestDTO;
 import com.zcklab.api.dto.NinjaResponseDTO;
 import com.zcklab.api.handler.NinjaNotFoundException;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +32,11 @@ public class ServiceNinja {
     private final ClanRepository repositoryClan;
 
 
+    // For each class that has a logger, you need to create the variable in this way
+    // so that you can use the methods .info .warn .error, etc.
+    private static final Logger logger = LoggerFactory.getLogger(ServiceNinja.class);
+
+
     // Anything that goes to a method that returns something will always be a Response,
     // and whenever it's a creation method, we'll transform the Request into an Entity
     // (for updating, we'll use both: transform it into an entity, save it, and update it back to a Request).
@@ -41,6 +48,7 @@ public class ServiceNinja {
 
     // 1. Find All
     public Page<NinjaResponseDTO> findAllNinjas(int page, int items) {
+        logger.info("Starting the search for ninjas: page {}, items per page {}", page, items);
 
         Pageable pageable = PageRequest.of(
                 page,
@@ -50,6 +58,7 @@ public class ServiceNinja {
         );
 
         Page<Ninja> ninjasPage = repositoryNinja.findAll(pageable);
+        logger.info("Ninjas page size: {}",  ninjasPage.getTotalElements());
 
         return ninjasPage.map(ninjaMapper::toResponseNinjaDTO);
     }
@@ -100,6 +109,7 @@ public class ServiceNinja {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja not found");
         }
         repositoryNinja.deleteById(id);
+        logger.info("Id: {} ninja has been deleted", id);
     }
 
 
