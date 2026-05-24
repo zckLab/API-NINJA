@@ -3,6 +3,8 @@ package com.zcklab.api.exception;
 import com.zcklab.api.handler.ErrorResponse;
 import com.zcklab.api.handler.NinjaNotFoundException;
 import com.zcklab.api.handler.ParamsNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
                      // in the controller or the service; Spring Boot takes care of it
 public class GlobalExceptionHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
 
     //@ExceptionHandler is precisely the ideal key for our problem, because with this annotation we transform our generic
     // error (which shows all our logic) into an error with HTTP Status and an error message.
@@ -24,7 +28,8 @@ public class GlobalExceptionHandler {
     // because we will receive various types of attributes, string, email, localdata, etc,
     // so it needs to be of type Generic, otherwise we would have to create a method
     // for each type (which is annoying asf)
-    public ResponseEntity<?> validateException(MethodArgumentNotValidException e) { //variable and of type MethodArgumentNotValidException
+    public ResponseEntity<?> validateException(MethodArgumentNotValidException e) {//variable and of type MethodArgumentNotValidException
+        logger.error("Invalid Method: {}", e.getMessage());
 
         ErrorResponse response = new ErrorResponse(); // calling constructor
 
@@ -46,14 +51,17 @@ public class GlobalExceptionHandler {
 
     }
 
+
     @ExceptionHandler(NinjaNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNinjaNotFound(NinjaNotFoundException e) {
-        ErrorResponse error = new ErrorResponse();
+        logger.warn("Ninja not found: {}", e.getMessage());
 
+        ErrorResponse error = new ErrorResponse();
         error.addError(new com.zcklab.api.handler.Error("ninja_list", e.getMessage())); //FROM THE LINE throw new NinjaNotFoundException("Ninja not found"); on service
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
 
     @ExceptionHandler(ParamsNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleParamsNotFound(ParamsNotFoundException e){
