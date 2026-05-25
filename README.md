@@ -75,6 +75,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 5. Access the H2 Console: `http://localhost:8081/h2-console`
+   - If you`re using postgresql, mySql, etc just run it
 
 ## Security Roadmap
 Planned security enhancements include:
