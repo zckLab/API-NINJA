@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ClanRepository extends JpaRepository<Clan, Long> {
-    @Query("SELECT c FROM Clans c JOIN FETCH c.ninja_clans")
+    @Query("SELECT c FROM Clan c JOIN FETCH c.ninja_clans")
     List<Clan> findAllWithNinjas();
 }

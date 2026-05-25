@@ -24,4 +24,8 @@ public class Missions { // Many missions can be assigned to a single ninja
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "missionId")
     private Ninja ninja_missions;
+
+    @ManyToOne
+    @JoinColumn(name = "clanId")
+    private Clan clan;
 }
