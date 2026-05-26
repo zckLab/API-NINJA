@@ -22,59 +22,31 @@ public class Ninja {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
 
-    @Column(name = "full_name", nullable = false, length = 100)
-    private String name;
+    @Column(name = "usrPasswd", nullable = false, length = 100)
+    private String password;
 
-
-    @Column(nullable = false, unique = true)
-    private String cpf;
+    @Column(name = "usrEmail", nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private Integer age;
 
-
-    @Column(name = "usr_email", nullable = false, unique = true)
-    private String email;
-
-
-    @Column(name = "usr_birth_date", nullable = false)
-    private LocalDate birthDate;
-
-
-    @Column(name = "usr_category", nullable = false)
+    @Column(name = "usrCategory", nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Column(name = "usr_ability",  nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Ability ability;
-
-
-    @Column(name = "usr_elementals", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Elementals elementals;
-
-
-    @Column(name = "usr_rank", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Rank rank;
-
-
     @Column(nullable = false)
-    @OneToMany(mappedBy = "ninja_missions") //one ninja can have a lot of missions
+    @OneToMany(mappedBy = "ninjaMissions") //one ninja can have a lot of missions
     private List<Missions>  missions;
 
-    @Column(nullable = false)
-    @OneToMany(mappedBy = "ninja_nearby_villages")
-    private List<NearbyVillages>  nearbyVillages;
 
     @Column(nullable = false)
-    @ManyToMany(mappedBy = "ninja_clans")
+    @ManyToMany(mappedBy = "ninjaClans")
     private List<Clan> clans;
 
 
-    @Column(name = "usr_description", nullable = false, length = 120)
-    private String description;
 
 }

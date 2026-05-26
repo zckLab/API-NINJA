@@ -123,16 +123,11 @@ public class ServiceNinja {
         Ninja ninjaExisting = repositoryNinja.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ninja not found"));
 
-        ninjaExisting.setName(ninjaDTO.name());
-        ninjaExisting.setCpf(ninjaDTO.cpf());
-        ninjaExisting.setAge(ninjaDTO.age());
+        ninjaExisting.setUsername(ninjaDTO.username());
+        ninjaExisting.setPassword(ninjaDTO.password());
         ninjaExisting.setEmail(ninjaDTO.email());
-        ninjaExisting.setBirthDate(ninjaDTO.birthDate());
+        ninjaExisting.setAge(ninjaDTO.age());
         ninjaExisting.setCategory(ninjaDTO.category());
-        ninjaExisting.setAbility(ninjaDTO.ability());
-        ninjaExisting.setElementals(ninjaDTO.elementals());
-        ninjaExisting.setRank(ninjaDTO.rank());
-        ninjaExisting.setDescription(ninjaDTO.description());
 
         return ninjaMapper.toResponseNinjaDTO(repositoryNinja.save(ninjaExisting));
     }

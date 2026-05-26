@@ -11,14 +11,9 @@ public interface NinjaMapper {
     NinjaResponseDTO toResponseNinjaDTO(Ninja ninja);
     Ninja toEntity(NinjaRequestDTO dto);
 
-
-
     @Mapping(source = "name", target = "MissionName")
     @Mapping(source = "description", target = "MissionDescription")
     MissionsDTO toMissionDTO(Missions missions);
-
-    @Mapping(source = "name", target = "VillageName")
-    NearbyVillageDTO toNearbyDTO(NearbyVillages nearbyVillages);
 
 
     ClanDTO toClanDTO(Clan clan);

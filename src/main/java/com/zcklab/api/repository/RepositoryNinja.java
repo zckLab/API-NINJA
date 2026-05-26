@@ -1,6 +1,5 @@
 package com.zcklab.api.repository;
 
-import com.zcklab.api.enums.Rank;
 import com.zcklab.api.model.Ninja;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,13 +30,6 @@ public interface RepositoryNinja extends JpaRepository<Ninja, Long> {
     //This is impractical.
     @Query("SELECT n.email FROM Ninja n")
     List<String> findAllEmails();
-
-
-    @Query(value = "SELECT * FROM tb_ninjas WHERE rank = :rank", nativeQuery = true)
-    List<Ninja> findSpecificRank(@Param("rank") Rank rank); // Returns all items that have that specific rank.
-
-    @Query(value = "SELECT DISTINCT rank FROM tb_ninjas", nativeQuery = true)
-    List<Rank> findAllRank();
 
 
     @Query(value = "SELECT COUNT(DISTINCT clans_id) FROM ninja_clans", nativeQuery = true)
